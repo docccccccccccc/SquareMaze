@@ -1,0 +1,76 @@
+[data-theme='classic'] {
+  --tile-border-color: rgb(0, 0, 0);
+  --tile-ground-color: rgb(0, 255, 10);
+  --tile-wall-color: rgb(128, 128, 128);
+  --tile-trap-color: rgb(255, 0, 0);
+  --tile-jump-color: rgb(255, 235, 0);
+  --tile-goal-color: rgb(204, 0, 255);
+  --tile-void-color: transparent;
+  --tile-portal-color: rgb(0, 255, 255);
+  --tile-door-color: rgb(255, 153, 0);
+  --tile-fake-wall-color: rgb(112, 112, 112);
+  --tile-hidden-ground-color: rgba(0, 255, 10, 0.05);
+  --tile-long-jump-color: rgb(0, 102, 255);
+  --tile-barrier-color: rgb(90, 255, 100);
+}
+
+[data-theme='smooth'] {
+  --tile-border-color: rgb(0, 0, 0);
+  --tile-ground-color: rgb(52, 199, 89);
+  --tile-wall-color: rgb(142, 142, 147);
+  --tile-trap-color: rgb(255, 69, 69);
+  --tile-jump-color: rgb(255, 214, 0);
+  --tile-goal-color: rgb(219, 52, 242);
+  --tile-void-color: transparent;
+  --tile-portal-color: rgb(60, 211, 254);
+  --tile-door-color: rgb(255, 146, 48);
+  --tile-fake-wall-color: rgb(126, 126, 131);
+  --tile-hidden-ground-color: rgba(52, 199, 89, 0.05);
+  --tile-long-jump-color: rgb(0, 145, 255);
+  --tile-barrier-color: rgb(142, 255, 179);
+}
+
+.tile {
+  box-sizing: border-box;
+  width: 64px;
+  height: 64px;
+  border: 4px solid var(--tile-border-color);
+  &.tile-ground {
+    background-color: var(--tile-ground-color);
+  }
+  &.tile-wall {
+    background-color: var(--tile-wall-color);
+  }
+  &.tile-trap {
+    background-color: var(--tile-trap-color);
+  }
+  &.tile-jump {
+    background-color: var(--tile-jump-color);
+  }
+  &.tile-goal {
+    background-color: var(--tile-goal-color);
+  }
+  &.tile-void {
+    background-color: var(--tile-void-color);
+    border: none;
+  }
+  &.tile-portal {
+    background-color: var(--tile-portal-color);
+  }
+  &.tile-door {
+    background-color: var(--tile-door-color);
+  }
+  &.tile-fake-wall {
+    background-color: var(--tile-fake-wall-color);
+  }
+  &.tile-hidden-ground {
+    background-color: var(--tile-hidden-ground-color);
+    border-color: rgba(0, 0, 0, 0.05);
+  }
+  &.tile-long-jump {
+    background-color: var(--tile-long-jump-color);
+  }
+  &.tile-barrier {
+    background-color: var(--tile-barrier-color);
+  }
+}
