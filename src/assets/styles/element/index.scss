@@ -1,0 +1,16 @@
+// @use '../font.css' as *;
+
+:root {
+  --el-font-family: '思源黑体', 'FiraCode', 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif !important;
+  // --el-color-primary: black
+}
+
+html,
+body,
+#app {
+  font-family: var(--el-font-family);
+}
+
+[class*="el"] {
+  font-family: inherit !important;
+}

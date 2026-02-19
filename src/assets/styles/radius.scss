@@ -1,0 +1,17 @@
+@use './vars/radius.scss';
+
+.radius-none {
+  border-radius: radius.$radius-none;
+}
+
+.radius-sm {
+  border-radius: radius.$radius-sm;
+}
+
+.radius-lg {
+  border-radius: radius.$radius-lg;
+}
+
+.radius-round {
+  border-radius: radius.$radius-round;
+}

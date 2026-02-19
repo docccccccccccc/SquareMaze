@@ -1,0 +1,23 @@
+/* 这是处理字体的 CSS 样式表。
+ * 导入字体请输入：
+ * font-famliy: '思源黑体'; */
+
+@font-face {
+  font-family: '思源黑体';
+  src:
+    url('../fonts/SourceHanSansCN-Normal.woff') format('woff'),
+    url('../fonts/SourceHanSansCN-Normal.ttf') format('truetype'),
+    url('../fonts/SourceHanSansCN-Normal.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FiraCode';
+  src:
+    url('../fonts/FIRACODE.woff') format('woff'),
+    url('../fonts/FIRACODE.TTF') format('truetype'),
+    url('../fonts/FIRACODE.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+}
