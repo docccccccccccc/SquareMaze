@@ -1,21 +1,7 @@
 <script setup lang="ts">
 import MainMenuButton from '@/components/MainMenuButton.vue';
 import { GAME_INFO } from '@/utils/gameInfo';
-import { nextTick, ref } from 'vue';
-import router from '@/router';
-import { sfxPlayers } from '@/utils/sfxPlayers';
 
-const showNewGameConfirmDialog = ref(false)
-
-const handleConfirmNewGame = () => {
-  showNewGameConfirmDialog.value = false
-  localStorage.removeItem('playerInfo')
-  router.push({ path: '/play' }).then(async () => {
-    await nextTick()
-    sfxPlayers.play('openUI')
-    location.reload()
-  })
-}
 </script>
 
 <template>
@@ -34,13 +20,6 @@ const handleConfirmNewGame = () => {
         <MainMenuButton href="/" text="游玩自定义关卡" icon="fas fa-paintbrush" />
       </div>
     </div>
-    <el-dialog v-model="showNewGameConfirmDialog" title="警告">
-      你已经有了游玩进度，开启新游戏将重置你的进度，确定开始新游戏吗？如果想继续游玩，请点击“继续游戏”。
-      <template #footer>
-        <el-button @click="showNewGameConfirmDialog = false">取消</el-button>
-        <el-button type="danger" @click="handleConfirmNewGame">开始新游戏</el-button>
-      </template>
-    </el-dialog>
   </div>
 </template>
 
