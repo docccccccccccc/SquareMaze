@@ -232,7 +232,6 @@ export class GameLogic {
               await nextTick();
               playerInfo.value.position = { x: 0, y: 0 };
               playerInfo.value.hasKey = false;
-              playerInfo.value.deaths = 0;
               location.reload();
             });
           },
