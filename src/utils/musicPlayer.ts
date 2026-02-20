@@ -46,7 +46,9 @@ class musicManager {
   }
 
   stop() {
-    this.player.stop();
+    if (this.player.isPlaying) {
+      this.player.stop();
+    }
   }
 
   updateMusicState() {
