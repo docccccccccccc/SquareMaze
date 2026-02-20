@@ -10,7 +10,6 @@ interface PlayerInfo {
   hasKey: boolean;
   deaths: number;
   direction: Direction;
-  isNewSave: boolean;
 }
 
 const defaultPlayerInfo: PlayerInfo = {
@@ -23,7 +22,6 @@ const defaultPlayerInfo: PlayerInfo = {
   hasKey: false,
   deaths: 0,
   direction: Direction.Up,
-  isNewSave: true,
 };
 
 export const usePlayerInfoStore = defineStore('playerInfoStore', () => {

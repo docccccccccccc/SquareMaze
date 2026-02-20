@@ -147,14 +147,19 @@ export class GameLogic {
 
   // 传送到某个关卡
   static goToLevel(levelId: number) {
-    // 传送到下一关的起始点
-    playerInfoStore.tpByPoint((this.getLevelById(levelId) as LevelData).startPosition);
-    // 如果当前关卡数超过最高关卡就同步
-    if (playerInfo.value.currentLevel > playerInfo.value.highestLevel) {
-      playerInfo.value.highestLevel = playerInfo.value.currentLevel;
+    const levelData = getLevelById(levelId);
+
+    if (levelData) {
+      playerInfoStore.playerInfo.currentLevel = levelId;
+      // 传送到下一关的起始点
+      playerInfoStore.tpByPoint((this.getLevelById(levelId) as LevelData).startPosition);
+      // 如果当前关卡数超过最高关卡就同步
+      if (playerInfo.value.currentLevel > playerInfo.value.highestLevel) {
+        playerInfo.value.highestLevel = playerInfo.value.currentLevel;
+      }
+      // 重置钥匙状态
+      playerInfo.value.hasKey = false;
     }
-    // 重置钥匙状态
-    playerInfo.value.hasKey = false;
   }
 
   static move(direction: Direction, distance?: number) {
