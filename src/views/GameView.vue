@@ -138,6 +138,25 @@ const getTileBackgroundImage = (tileType: TileType) => {
   return `url(${imageUrl})`
 }
 
+const keyItemImageLink = computed(() => {
+  let result: string = ''
+  switch (globalSettings.value.appearance.tileColorTheme) {
+    case 'classic':
+      result = 'keyClassic.svg'
+      break
+    case 'smooth':
+      result = 'keySmooth.svg'
+      break
+    default:
+      result = 'none'
+      break
+  }
+
+  return result === 'none'
+    ? result
+    : `/${result}`
+})
+
 const reloadPage = () => {
   location.reload()
 }
@@ -178,8 +197,15 @@ const backToMainMenuOnError = () => {
         </div>
       </div>
     </div>
-    <div id="game-hero"
-      style="left: 50%; top: 50%; position: fixed; transform: translate(-50%, -50%); width: 48px; height: 48px">
+    <div id="game-key-item" :style="{
+      transform: `translate(${mapOffset.x + 64 * (thisLevel?.keyPosition.x || 0)}px, ${mapOffset.y + 64 * (thisLevel?.keyPosition.y || 0)}px)`,
+      transition: '0.2s ease-out',
+      position: 'fixed'
+    }" v-if="!playerInfo.hasKey && thisLevel?.keyPosition">
+      <img :src="keyItemImageLink" width="48px" height="48px" />
+    </div>
+
+    <div id="game-hero">
       <img src="/heroes/hero1.svg" width="48px" height="48px" />
     </div>
     <el-space id="game-controls" direction="vertical">
@@ -273,5 +299,14 @@ const backToMainMenuOnError = () => {
   align-items: center;
   height: 100vh;
   font-size: 1.5rem;
+}
+
+#game-hero {
+  left: 50%;
+  top: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px
 }
 </style>
