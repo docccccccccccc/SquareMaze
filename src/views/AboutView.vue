@@ -16,7 +16,7 @@ import gameIcon from '@/assets/images/icon.svg'
       <h2>{{ GAME_INFO.GAME_NAME }}</h2>
       <h3>{{ GAME_INFO.GAME_VERSION }}</h3>
       <p>By doctypehtml</p>
-      <p>GitHub 仓库链接：<el-link href="https://www.github.com/">这里</el-link></p>
+      <p>GitHub 仓库链接：<el-link href="https://github.com/docccccccccccc/SquareMaze">这里</el-link></p>
       <p>作者 B 站主页：<el-link href="https://space.bilibili.com/3546694681626801/">这里</el-link></p>
       <p>作者 GitHub 主页：<el-link href="https://github.com/docccccccccccc">这里</el-link></p>
       <p>作者爱发电主页：<el-link href="https://afdian.com/a/doctypehtml">这里</el-link></p>
