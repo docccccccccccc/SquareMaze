@@ -1,9 +1,10 @@
-import { fileURLToPath, URL } from 'node:url'
-import path from 'path'
-import vue from '@vitejs/plugin-vue'
-import vueDevTools from 'vite-plugin-vue-devtools'
-import ElementPlus from 'unplugin-element-plus/vite'
-import { defineConfig } from 'vite'
+import { fileURLToPath, URL } from 'node:url';
+import path from 'path';
+import vue from '@vitejs/plugin-vue';
+import vueDevTools from 'vite-plugin-vue-devtools';
+import ElementPlus from 'unplugin-element-plus/vite';
+import { defineConfig } from 'vite';
+import packageJson from './package.json';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -11,7 +12,7 @@ export default defineConfig({
     vue(),
     vueDevTools(),
     ElementPlus({
-      useSource: true
+      useSource: true,
     }),
   ],
   resolve: {
@@ -21,13 +22,9 @@ export default defineConfig({
     },
   },
   server: {
-      host: '0.0.0.0',
-    },
-  // css: {
-  //   preprocessorOptions: {
-  //     scss: {
-  //       additionalData: `@use "~/assets/styles/element/index.scss" as *;`,
-  //     },
-  //   },
-  // }
-})
+    host: '0.0.0.0',
+  },
+  define: {
+    __GAME_VERSION__: JSON.stringify(packageJson.version),
+  },
+});

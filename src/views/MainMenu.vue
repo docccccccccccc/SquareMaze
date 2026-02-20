@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import MainMenuButton from '@/components/MainMenuButton.vue';
 import { GAME_INFO } from '@/utils/gameInfo';
+import { onMounted, ref } from 'vue'
 
+const GAME_VERSION = ref('')
+
+onMounted(() => {
+  GAME_VERSION.value = __GAME_VERSION__
+})
 </script>
 
 <template>
@@ -9,7 +15,7 @@ import { GAME_INFO } from '@/utils/gameInfo';
     <div id="main-menu">
       <div id="game-title">
         <span id="game-title-text">{{ GAME_INFO.GAME_NAME }}</span>
-        <span id="game-version">{{ GAME_INFO.GAME_VERSION }}</span>
+        <span id="game-version">V{{ GAME_VERSION }}</span>
       </div>
       <div id="main-menu-buttons">
         <MainMenuButton href="/select" text="选择关卡" icon="fas fa-list" />
