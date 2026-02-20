@@ -230,7 +230,9 @@ export class GameLogic {
           callback: () => {
             router.push({ path: '/' }).then(async () => {
               await nextTick();
-              playerInfo.value.position = { x: 0, y: 0 };
+              playerInfo.value.isNewSave = false;
+              playerInfo.value.position.x = this.getCurrentLevel()?.startPosition.x;
+              playerInfo.value.position.y = this.getCurrentLevel()?.startPosition.y;
               playerInfo.value.hasKey = false;
               location.reload();
             });
