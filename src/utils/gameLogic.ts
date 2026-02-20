@@ -283,7 +283,12 @@ export class GameLogic {
     // 处理钥匙逻辑
     const keyPosition = this.getCurrentLevel()?.keyPosition;
     // 如果真的有钥匙，并且碰到了钥匙
-    if (keyPosition && playerInfo.value.position === keyPosition) {
+    if (
+      keyPosition &&
+      playerInfo.value.position.x === keyPosition.x &&
+      playerInfo.value.position.y === keyPosition.y &&
+      !playerInfo.value.hasKey
+    ) {
       playerInfo.value.hasKey = true;
       sfxPlayers.play('door');
     }
