@@ -6,7 +6,7 @@
 
 2022 年下半年，我使用 Scratch 做了一个游戏，叫“方块迷宫”. 我当时给几个网友分享了这个游戏，其中一个说刚认识我的时候我就在做这个.
 
-音效素材取自[这里](https://github.com/ckcz123/mota-js/tree/master/project/sounds)（https://github.com/ckcz123/mota-js/tree/master/project/sounds）.
+音效素材取自[这里](https://github.com/ckcz123/mota-js/tree/master/project/sounds).
 
 然后我一直把游戏的更新计划搁置（（（（（
 
