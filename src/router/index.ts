@@ -5,6 +5,7 @@ const router = createRouter({
   routes: [
     { component: () => import('@/views/MainMenu.vue'), path: '/' },
     { component: () => import('@/views/GameSettings.vue'), path: '/settings' },
+    { component: () => import('@/views/SelectLevel.vue'), path: '/select' },
     { component: () => import('@/views/AboutView.vue'), path: '/about' },
     { component: () => import('@/views/GameView.vue'), path: '/play' },
     { component: () => import('@/views/HelpView.vue'), path: '/help' },

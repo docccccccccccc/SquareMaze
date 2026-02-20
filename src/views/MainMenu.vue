@@ -1,22 +1,9 @@
 <script setup lang="ts">
 import MainMenuButton from '@/components/MainMenuButton.vue';
 import { GAME_INFO } from '@/utils/gameInfo';
-import { usePlayerInfoStore } from '@/stores/playerInfo';
-import { storeToRefs } from 'pinia';
 import { nextTick, ref } from 'vue';
 import router from '@/router';
 import { sfxPlayers } from '@/utils/sfxPlayers';
-
-const { playerInfo } = storeToRefs(usePlayerInfoStore())
-const handleCreateNewGame = () => {
-  if (playerInfo.value.isNewSave) {
-    playerInfo.value.isNewSave = false
-    router.push({ path: '/play' })
-    sfxPlayers.play('openUI')
-  } else {
-    showNewGameConfirmDialog.value = true
-  }
-}
 
 const showNewGameConfirmDialog = ref(false)
 
@@ -39,9 +26,7 @@ const handleConfirmNewGame = () => {
         <span id="game-version">{{ GAME_INFO.GAME_VERSION }}</span>
       </div>
       <div id="main-menu-buttons">
-        <MainMenuButton text="开始新游戏" icon="fas fa-gamepad" @click="handleCreateNewGame" />
-        <MainMenuButton href="/play" text="继续游戏" icon="fas fa-arrow-right" v-if="!playerInfo.isNewSave" />
-        <MainMenuButton href="/" text="选择关卡" icon="fas fa-list" />
+        <MainMenuButton href="/select" text="选择关卡" icon="fas fa-list" />
         <MainMenuButton href="/settings" text="设置" icon="fas fa-cog" />
         <MainMenuButton href="/about" text="关于" icon="fas fa-info-circle" />
         <MainMenuButton href="/help" text="帮助" icon="fas fa-question" />
