@@ -230,7 +230,6 @@ export class GameLogic {
           callback: () => {
             router.push({ path: '/' }).then(async () => {
               await nextTick();
-              playerInfo.value.currentLevel = 1;
               playerInfo.value.position = { x: 0, y: 0 };
               playerInfo.value.hasKey = false;
               playerInfo.value.deaths = 0;
