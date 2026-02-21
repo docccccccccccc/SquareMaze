@@ -2,6 +2,7 @@
 import type { LevelData } from '@/types/levelInterface';
 import { GameLogic } from '@/utils/gameLogic';
 import { getLevelById, loadLevels } from '@/utils/loadLevel';
+import { sfxPlayers } from '@/utils/sfxPlayers';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -22,13 +23,26 @@ onMounted(async () => {
 })
 
 const handleGoToLevel = () => {
+  try {
+    sfxPlayers.play('openUI')
+  } catch (error) {
+    console.log('发生错误：', error)
+  }
   GameLogic.goToLevel(props.id);
   router.push({ path: '/play' })
+}
+
+const handleMouseEnter = () => {
+  try {
+    sfxPlayers.play('hover')
+  } catch (error) {
+    console.log('发生错误：', error)
+  }
 }
 </script>
 
 <template>
-  <el-card v-if="thisLevelData" class="level-link" @click="handleGoToLevel">
+  <el-card v-if="thisLevelData" class="level-link" @click="handleGoToLevel" @mouseenter="handleMouseEnter">
     <span><font-awesome-icon icon="fas fa-arrow-right" />Level {{ id }} {{ thisLevelData.name }}</span>
   </el-card>
   <el-card v-else class="level-link-error">
