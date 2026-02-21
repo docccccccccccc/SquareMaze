@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import MainMenuButton from '@/components/MainMenuButton.vue';
-import { GAME_INFO } from '@/utils/gameInfo';
 import { onMounted, ref } from 'vue'
 
 const GAME_VERSION = ref('')
+const GAME_NAME = ref('')
 
 onMounted(() => {
   GAME_VERSION.value = __GAME_VERSION__
+  GAME_NAME.value = __GAME_NAME__
 })
 </script>
 
@@ -14,7 +15,7 @@ onMounted(() => {
   <div>
     <div id="main-menu">
       <div id="game-title">
-        <span id="game-title-text">{{ GAME_INFO.GAME_NAME }}</span>
+        <span id="game-title-text">{{ GAME_NAME }}</span>
         <span id="game-version">V{{ GAME_VERSION }}</span>
       </div>
       <div id="main-menu-buttons">
