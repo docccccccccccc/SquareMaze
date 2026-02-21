@@ -26,6 +26,5 @@ export default defineConfig({
   },
   define: {
     __GAME_VERSION__: JSON.stringify(packageJson.version),
-    __GAME_NAME__: '方块迷宫',
   },
 });
