@@ -45,14 +45,14 @@ const handleMouseEnter = () => {
   <el-card v-if="thisLevelData" class="level-link" @click="handleGoToLevel" @mouseenter="handleMouseEnter">
     <span><font-awesome-icon icon="fas fa-arrow-right" />Level {{ id }} {{ thisLevelData.name }}</span>
   </el-card>
-  <el-card v-else class="level-link-error">
-    <span>找不到 ID 为 {{ id }} 的关卡.</span>
+  <el-card v-else class="level-link-loading">
+    <span>加载中……</span>
   </el-card>
 </template>
 
 <style lang="scss" scoped>
 .level-link,
-.level-link-error {
+.level-link-loading {
   height: 64px;
   text-align: left;
 }
@@ -61,10 +61,5 @@ const handleMouseEnter = () => {
   background-color: var(--el-color-primary-light-7);
   color: var(--el-color-primary-dark-2);
   cursor: pointer;
-}
-
-.level-link-error {
-  background-color: var(--el-color-error-light-7);
-  color: var(--el-color-error-dark-2)
 }
 </style>
