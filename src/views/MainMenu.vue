@@ -60,15 +60,24 @@ onMounted(() => {
   #game-title {
     left: 50%;
     transform: translateX(-50%);
+    top: 32px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
   }
 
   #game-title-text {
-    font-size: 4em;
+    font-size: 3em;
   }
 
   #main-menu-buttons {
     right: 50%;
-    transform: translateX(50%)
+    transform: translateX(50%);
+    font-size: 12px;
+    bottom: 32px;
+    width: 80%;
+    // position: fixed
   }
 }
 </style>
