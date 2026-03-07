@@ -1,0 +1,18 @@
+{
+    "id": 14,
+    "name": "稍微放松一下",
+    "width": 2,
+    "height": 1,
+    "startPosition": {
+        "x": 0,
+        "y": 0
+    },
+    "mapData": {
+        "default": [
+            [
+                0,
+                4
+            ]
+        ]
+    }
+}
