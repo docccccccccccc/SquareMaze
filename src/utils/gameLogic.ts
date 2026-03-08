@@ -84,18 +84,14 @@ export class GameLogic {
 
   // 获取当前关卡信息
   static getCurrentLevel(): LevelData | null {
+    // 获取关卡列表
     const allLevels = getLevels();
+    // 按照关卡 ID 获取结果
     const result = allLevels.find((level) => level.id === playerInfo.value.currentLevel);
     if (result === undefined) {
       return null;
     }
     return result;
-  }
-
-  // 按关卡 ID 获取关卡信息
-  static getLevelById(levelId: number): LevelData | null {
-    const level = getLevelById(levelId);
-    return level ?? null;
   }
 
   // 根据图块类型获取其对应的 className
@@ -152,7 +148,7 @@ export class GameLogic {
     if (levelData) {
       playerInfoStore.playerInfo.currentLevel = levelId;
       // 传送到下一关的起始点
-      playerInfoStore.tpByPoint((this.getLevelById(levelId) as LevelData).startPosition);
+      playerInfoStore.tpByPoint((getLevelById(levelId) as LevelData).startPosition);
       // 如果当前关卡数超过最高关卡就同步
       if (playerInfo.value.currentLevel > playerInfo.value.highestLevel) {
         playerInfo.value.highestLevel = playerInfo.value.currentLevel;
