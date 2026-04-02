@@ -117,6 +117,7 @@ const getTileBackgroundImage = (tileType: TileType) => {
   return `url(${imageUrl})`
 }
 
+// 钥匙图片
 const keyItemImageLink = computed(() => {
   let result: string = ''
   switch (globalSettings.value.appearance.tileColorTheme) {
@@ -137,12 +138,15 @@ const keyItemImageLink = computed(() => {
 })
 
 // 创建自定义关卡的表单
+
+// 接口
 interface CreationForm {
   name: string,
   width: number,
   height: number
 }
 
+// 以及数据
 const creationForm = reactive<CreationForm>({
   name: '新关卡',
   width: 12,
@@ -151,6 +155,7 @@ const creationForm = reactive<CreationForm>({
 
 const creationFormRef = ref<FormInstance>()
 
+// 表单规则
 const formRules = reactive<FormRules<CreationForm>>(
   {
     name: [
@@ -166,84 +171,91 @@ const formRules = reactive<FormRules<CreationForm>>(
   }
 )
 
+// 创建确认对话框
 const creationConfirmationDialogVisible = ref(false)
+
+const handleCreatingCustomLevel = () => {
+  creationConfirmationDialogVisible.value = false;
+}
 </script>
 
 <template>
-  <div v-if="creationStatus.status">
-    <div id="game-topbar" class="radius-lg">
-      <span>自定义关卡：{{ customLevelData.name }}&nbsp;</span>
-      <span>
-        <font-awesome-icon icon="fas fa-location-dot" />
-        ({{ spectatorPosition.x }}, {{ spectatorPosition.y }})
-      </span>
-      <el-space :size="4">
-        <SmallExitButton />
-      </el-space>
-    </div>
-    <div id="game-map">
-      <div class="tile-line" v-for="(mapLine, yIndex) in thisMap" :key="`tile-line-${yIndex}`" :style="{
-        transform: `translate(${mapOffset.x}px, ${mapOffset.y}px)`
-      }">
-        <div class="tile" v-for="(mapTile, xIndex) in mapLine" :key="`tile-${xIndex}-${yIndex}`"
-          :class="GameLogic.getTileClassName(mapTile)" :style="{
-            left: `${xIndex * 64}px`,
-            top: `${yIndex * 64}px`,
-            backgroundImage: getTileBackgroundImage(mapTile)
-          }">
+  <div>
+    <div v-if="creationStatus.status">
+      <div id="game-topbar" class="radius-lg">
+        <span>自定义关卡：{{ customLevelData.name }}&nbsp;</span>
+        <span>
+          <font-awesome-icon icon="fas fa-location-dot" />
+          ({{ spectatorPosition.x }}, {{ spectatorPosition.y }})
+        </span>
+        <el-space :size="4">
+          <SmallExitButton />
+        </el-space>
+      </div>
+      <div id="game-map">
+        <div class="tile-line" v-for="(mapLine, yIndex) in thisMap" :key="`tile-line-${yIndex}`" :style="{
+          transform: `translate(${mapOffset.x}px, ${mapOffset.y}px)`
+        }">
+          <div class="tile" v-for="(mapTile, xIndex) in mapLine" :key="`tile-${xIndex}-${yIndex}`"
+            :class="GameLogic.getTileClassName(mapTile)" :style="{
+              left: `${xIndex * 64}px`,
+              top: `${yIndex * 64}px`,
+              backgroundImage: getTileBackgroundImage(mapTile)
+            }">
+          </div>
         </div>
       </div>
-    </div>
-    <div id="game-key-item" :style="{
-      transform: `translate(${mapOffset.x + 64 * (customLevelData?.keyPosition?.x || 0)}px, ${mapOffset.y + 64 * (customLevelData?.keyPosition?.y || 0)}px)`,
-      transition: '0.2s ease-out',
-      position: 'fixed'
-    }" v-if="!playerInfo.hasKey && customLevelData?.keyPosition">
-      <img :src="keyItemImageLink" width="48px" height="48px" />
-    </div>
+      <div id="game-key-item" :style="{
+        transform: `translate(${mapOffset.x + 64 * (customLevelData?.keyPosition?.x || 0)}px, ${mapOffset.y + 64 * (customLevelData?.keyPosition?.y || 0)}px)`,
+        transition: '0.2s ease-out',
+        position: 'fixed'
+      }" v-if="!playerInfo.hasKey && customLevelData?.keyPosition">
+        <img :src="keyItemImageLink" width="48px" height="48px" />
+      </div>
 
-    <div id="game-hero">
-      <img src="/heroes/hero1.svg" width="48px" height="48px" />
-    </div>
-    <el-space id="game-controls" direction="vertical">
-      <ControlButton :direction="directions.Up" />
-      <el-space>
-        <ControlButton :direction="directions.Left" />
-        <ControlButton :direction="directions.Down" />
-        <ControlButton :direction="directions.Right" />
+      <div id="game-hero">
+        <img src="/heroes/hero1.svg" width="48px" height="48px" />
+      </div>
+      <el-space id="game-controls" direction="vertical">
+        <ControlButton :direction="directions.Up" />
+        <el-space>
+          <ControlButton :direction="directions.Left" />
+          <ControlButton :direction="directions.Down" />
+          <ControlButton :direction="directions.Right" />
+        </el-space>
       </el-space>
-    </el-space>
+    </div>
+    <div v-else class="create">
+      <MiddleLayout>
+        <PageTopBar>
+          创建新的自定义关卡
+        </PageTopBar>
+        <el-form :ref="creationFormRef" :model="creationForm" :rules="formRules" label-width="auto">
+          <el-form-item label="关卡名称" prop="name">
+            <el-input v-model="creationForm.name" style="max-width: 300px" />
+          </el-form-item>
+          <el-form-item prop="width" label="地图宽度" required>
+            <el-input-number v-model="creationForm.width" :min="2" :max="100" />
+          </el-form-item>
+          <el-form-item prop="height" label="地图高度" required>
+            <el-input-number v-model="creationForm.height" :min="2" :max="100" />
+          </el-form-item>
+        </el-form>
+        <el-row>
+          <el-button type="primary" @click="creationConfirmationDialogVisible = true">创建</el-button>
+        </el-row>
+      </MiddleLayout>
+    </div>
+    <el-dialog v-model="creationConfirmationDialogVisible" title="警告" width="70%">
+      <p>地图大小一旦确定，无法更改！只能通过重建新地图修改大小！</p>
+      <p>你选择的地图大小：<b>{{ creationForm.width }} × {{ creationForm.height }}</b></p>
+      <p><b>这是最后的警告，你确定要创建吗？</b></p>
+      <template #footer>
+        <el-button @click="creationConfirmationDialogVisible = false">取消</el-button>
+        <el-button @click="handleCreatingCustomLevel()">确定</el-button>
+      </template>
+    </el-dialog>
   </div>
-  <div v-else class="create">
-    <MiddleLayout>
-      <PageTopBar>
-        创建新的自定义关卡
-      </PageTopBar>
-      <el-form :ref="creationFormRef" :model="creationForm" :rules="formRules" label-width="auto">
-        <el-form-item label="关卡名称" prop="name">
-          <el-input v-model="creationForm.name" style="max-width: 300px" />
-        </el-form-item>
-        <el-form-item prop="width" label="地图宽度" required>
-          <el-input-number v-model="creationForm.width" :min="2" :max="100" />
-        </el-form-item>
-        <el-form-item prop="height" label="地图高度" required>
-          <el-input-number v-model="creationForm.height" :min="2" :max="100" />
-        </el-form-item>
-      </el-form>
-      <el-rol>
-        <el-button type="primary" @click="creationConfirmationDialogVisible = true">创建</el-button>
-      </el-rol>
-    </MiddleLayout>
-  </div>
-  <el-dialog v-model="creationConfirmationDialogVisible" title="警告" width="70%">
-    <p>地图大小一旦确定，无法更改！只能通过重建新地图修改大小！</p>
-    <p>你选择的地图大小：<b>{{ creationForm.width }} × {{ creationForm.height }}</b></p>
-    <p><b>这是最后的警告，你确定要创建吗？</b></p>
-    <template #footer>
-      <el-button @click="creationConfirmationDialogVisible = false">取消</el-button>
-      <el-button>确定</el-button>
-    </template>
-  </el-dialog>
 </template>
 
 <style lang="scss" scoped>

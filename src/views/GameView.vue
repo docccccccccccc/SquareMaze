@@ -168,72 +168,74 @@ const backToMainMenuOnError = () => {
 </script>
 
 <template>
-  <div v-if="levelsLoaded">
-    <div id="game-topbar" class="radius-lg">
-      <span>Level {{ thisLevel?.id }} {{ thisLevel?.name }}&nbsp;</span>
-      <span>
-        <font-awesome-icon icon="fas fa-location-dot" />
-        ({{ playerInfo.position.x }}, {{ playerInfo.position.y }})
-      </span>
-      <span>
-        <font-awesome-icon icon="fas fa-skull-crossbones" />
-        {{ playerInfo.deaths }}
-      </span>
-      <el-space :size="4">
-        <SmallSettingsButton />
-        <SmallExitButton />
-      </el-space>
-    </div>
-    <div id="game-map">
-      <div class="tile-line" v-for="(mapLine, yIndex) in thisMap" :key="`tile-line-${yIndex}`" :style="{
-        transform: `translate(${mapOffset.x}px, ${mapOffset.y}px)`
-      }">
-        <div class="tile" v-for="(mapTile, xIndex) in mapLine" :key="`tile-${xIndex}-${yIndex}`"
-          :class="GameLogic.getTileClassName(mapTile)" :style="{
-            left: `${xIndex * 64}px`,
-            top: `${yIndex * 64}px`,
-            backgroundImage: getTileBackgroundImage(mapTile)
-          }">
+  <div>
+    <div v-if="levelsLoaded">
+      <div id="game-topbar" class="radius-lg">
+        <span>Level {{ thisLevel?.id }} {{ thisLevel?.name }}&nbsp;</span>
+        <span>
+          <font-awesome-icon icon="fas fa-location-dot" />
+          ({{ playerInfo.position.x }}, {{ playerInfo.position.y }})
+        </span>
+        <span>
+          <font-awesome-icon icon="fas fa-skull-crossbones" />
+          {{ playerInfo.deaths }}
+        </span>
+        <el-space :size="4">
+          <SmallSettingsButton />
+          <SmallExitButton />
+        </el-space>
+      </div>
+      <div id="game-map">
+        <div class="tile-line" v-for="(mapLine, yIndex) in thisMap" :key="`tile-line-${yIndex}`" :style="{
+          transform: `translate(${mapOffset.x}px, ${mapOffset.y}px)`
+        }">
+          <div class="tile" v-for="(mapTile, xIndex) in mapLine" :key="`tile-${xIndex}-${yIndex}`"
+            :class="GameLogic.getTileClassName(mapTile)" :style="{
+              left: `${xIndex * 64}px`,
+              top: `${yIndex * 64}px`,
+              backgroundImage: getTileBackgroundImage(mapTile)
+            }">
+          </div>
         </div>
       </div>
-    </div>
-    <div id="game-key-item" :style="{
-      transform: `translate(${mapOffset.x + 64 * (thisLevel?.keyPosition.x || 0)}px, ${mapOffset.y + 64 * (thisLevel?.keyPosition.y || 0)}px)`,
-      transition: '0.2s ease-out',
-      position: 'fixed'
-    }" v-if="!playerInfo.hasKey && thisLevel?.keyPosition">
-      <img :src="keyItemImageLink" width="48px" height="48px" />
-    </div>
+      <div id="game-key-item" :style="{
+        transform: `translate(${mapOffset.x + 64 * (thisLevel?.keyPosition.x || 0)}px, ${mapOffset.y + 64 * (thisLevel?.keyPosition.y || 0)}px)`,
+        transition: '0.2s ease-out',
+        position: 'fixed'
+      }" v-if="!playerInfo.hasKey && thisLevel?.keyPosition">
+        <img :src="keyItemImageLink" width="48px" height="48px" />
+      </div>
 
-    <div id="game-hero">
-      <img src="/heroes/hero1.svg" width="48px" height="48px" />
-    </div>
-    <el-space id="game-controls" direction="vertical">
-      <ControlButton :direction="directions.Up" />
-      <el-space>
-        <ControlButton :direction="directions.Left" />
-        <ControlButton :direction="directions.Down" />
-        <ControlButton :direction="directions.Right" />
+      <div id="game-hero">
+        <img src="/heroes/hero1.svg" width="48px" height="48px" />
+      </div>
+      <el-space id="game-controls" direction="vertical">
+        <ControlButton :direction="directions.Up" />
+        <el-space>
+          <ControlButton :direction="directions.Left" />
+          <ControlButton :direction="directions.Down" />
+          <ControlButton :direction="directions.Right" />
+        </el-space>
       </el-space>
-    </el-space>
-  </div>
-  <div v-else class="loading">
-    <div v-if="!loadingIsSuccessful && typeof loadingIsSuccessful === 'boolean'">
-      <MiddleLayout>
-        <p>
-          加载失败
-        </p>
-        <p style="font-size: 16px">
-          <span>将下方的错误信息汇报给作者：</span>
-          <br>
-          <span>{{ loadingErrorInfo }}</span>
-        </p>
-        <el-button @click="reloadPage">刷新页面</el-button>
-        <el-button @click="backToMainMenuOnError">回到主页</el-button>
-      </MiddleLayout>
     </div>
-    <div v-if="loadingIsSuccessful === null">
-      加载中……
+    <div v-else class="loading">
+      <div v-if="!loadingIsSuccessful && typeof loadingIsSuccessful === 'boolean'">
+        <MiddleLayout>
+          <p>
+            加载失败
+          </p>
+          <p style="font-size: 16px">
+            <span>将下方的错误信息汇报给作者：</span>
+            <br>
+            <span>{{ loadingErrorInfo }}</span>
+          </p>
+          <el-button @click="reloadPage">刷新页面</el-button>
+          <el-button @click="backToMainMenuOnError">回到主页</el-button>
+        </MiddleLayout>
+      </div>
+      <div v-if="loadingIsSuccessful === null">
+        加载中……
+      </div>
     </div>
   </div>
 </template>
