@@ -1,7 +1,7 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createMemoryHistory } from 'vue-router';
 
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  history: createMemoryHistory(import.meta.env.BASE_URL),
   routes: [
     { component: () => import('@/views/MainMenu.vue'), path: '/' },
     { component: () => import('@/views/GameSettings.vue'), path: '/settings' },

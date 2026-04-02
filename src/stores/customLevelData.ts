@@ -4,7 +4,7 @@ import type { LevelData } from '@/types/levelInterface';
 
 const defaultCustomLevelData: LevelData = {
   id: 1000000,
-  name: '关卡名',
+  name: '',
   width: 0,
   height: 0,
   mapData: {

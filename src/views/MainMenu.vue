@@ -22,7 +22,7 @@ onMounted(() => {
         <MainMenuButton href="/settings" text="设置" icon="fas fa-cog" />
         <MainMenuButton href="/about" text="关于" icon="fas fa-info-circle" />
         <MainMenuButton href="/help" text="帮助" icon="fas fa-question" />
-        <MainMenuButton href="/" text="创建自定义关卡" icon="fas fa-add" />
+        <MainMenuButton href="/custom/create" text="创建自定义关卡" icon="fas fa-add" />
         <MainMenuButton href="/" text="游玩自定义关卡" icon="fas fa-paintbrush" />
       </div>
     </div>
