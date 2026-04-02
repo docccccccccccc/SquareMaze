@@ -3,7 +3,7 @@ import { reactive, ref, watch } from 'vue';
 import type { LevelData } from '@/types/levelInterface';
 
 const defaultCustomLevelData: LevelData = {
-  id: 1000000,
+  id: 1000000, // 别问我为什么取这么高的数值
   name: '',
   width: 0,
   height: 0,
@@ -17,17 +17,22 @@ const defaultCustomLevelData: LevelData = {
 };
 
 export const useCustomLevelDataStore = defineStore('customLevelDataStore', () => {
-  const savedCustomLevelData = localStorage.getItem('customLevelData');
-  const savedCreationStatus = localStorage.getItem('isCustomLevelCreated');
+  const savedCustomLevelData = localStorage.getItem('customLevelData'); // 从 localstorage 取出数据
+  const savedCreationStatus = localStorage.getItem('isCustomLevelCreated'); // 以及状态
+  // 然后 init，找不到就默认
   const initialCustomLevelData = savedCustomLevelData
     ? (JSON.parse(savedCustomLevelData) as LevelData)
     : defaultCustomLevelData;
+
   const initialCreationStatus = savedCreationStatus
     ? JSON.parse(savedCreationStatus)
     : { status: false };
+
+  // 然后再设置
   const customLevelData = reactive(initialCustomLevelData);
   const creationStatus = ref(initialCreationStatus);
 
+  // 监听变化
   watch(
     () => customLevelData,
     (newData) => {
