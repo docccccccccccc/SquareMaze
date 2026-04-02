@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import MiddleLayout from '@/components/MiddleLayout.vue';
-import BackButton from '@/components/BackButton.vue';
+import PageTopBar from '@/components/PageTopBar.vue'
 import { useGlobalSettingsStore } from '@/stores/globalSettings';
 import { storeToRefs } from 'pinia';
 import { tileColorThemes } from '@/utils/tileColorThemes';
@@ -53,10 +53,9 @@ const handleResetSettings = () => {
 
 <template>
   <MiddleLayout>
-    <h1>
+    <PageTopBar>
       设置
-      <BackButton />
-    </h1>
+    </PageTopBar>
     <el-space direction="vertical" fill wrap class="settings-main">
       <el-card>
         <template #header>外观</template>

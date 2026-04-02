@@ -15,7 +15,7 @@ import type { TileType } from '@/types/tileType';
 import SmallExitButton from '@/components/SmallExitButtion.vue';
 import MiddleLayout from '@/components/MiddleLayout.vue';
 import ControlButton from '@/components/ControlButton.vue';
-import BackButton from '@/components/BackButton.vue';
+import PageTopBar from '@/components/PageTopBar.vue'
 import '@/assets/styles/tileColors.scss'
 import type { FormRules, FormInstance } from 'element-plus';
 
@@ -216,10 +216,9 @@ const creationConfirmationDialogVisible = ref(false)
   </div>
   <div v-else class="create">
     <MiddleLayout>
-      <h1>
+      <PageTopBar>
         创建新的自定义关卡
-        <BackButton />
-      </h1>
+      </PageTopBar>
       <el-form :ref="creationFormRef" :model="creationForm" :rules="formRules" label-width="auto">
         <el-form-item label="关卡名称" prop="name">
           <el-input v-model="creationForm.name" style="max-width: 300px" />
@@ -249,12 +248,6 @@ const creationConfirmationDialogVisible = ref(false)
 
 <style lang="scss" scoped>
 @use '@/assets/styles/vars/space.scss' as *;
-
-h1 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
 .tile-line {
   display: flex;

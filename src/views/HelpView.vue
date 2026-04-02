@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BackButton from '@/components/BackButton.vue';
+import PageTopBar from '@/components/PageTopBar.vue'
 import MiddleLayout from '@/components/MiddleLayout.vue';
 import SingleKey from '@/components/SingleKey.vue';
 import TileHelpCard from '@/components/TileHelpCard.vue';
@@ -8,10 +8,9 @@ import { TileType } from '@/types/tileType';
 
 <template>
   <MiddleLayout>
-    <h1>
+    <PageTopBar>
       帮助
-      <BackButton />
-    </h1>
+    </PageTopBar>
     <el-card>
       <template #header>操作</template>
       <div class="help-main">

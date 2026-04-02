@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import BackButton from '@/components/BackButton.vue';
 import { GAME_INFO } from '@/utils/gameInfo';
 import MiddleLayout from '@/components/MiddleLayout.vue';
 import gameIcon from '@/assets/images/icon.svg'
 import { ref, onMounted } from 'vue'
+import PageTopBar from '@/components/PageTopBar.vue';
 
 const GAME_VERSION = ref('')
 
@@ -14,10 +14,9 @@ onMounted(() => {
 
 <template>
   <MiddleLayout>
-    <h1>
+    <PageTopBar>
       关于
-      <BackButton />
-    </h1>
+    </PageTopBar>
     <el-card>
       <el-image style="height: 128px; width: 128px" :src="gameIcon" />
       <h2>{{ GAME_INFO.GAME_NAME }}</h2>

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import MiddleLayout from '@/components/MiddleLayout.vue';
-import BackButton from '@/components/BackButton.vue';
+import PageTopBar from '@/components/PageTopBar.vue'
 import LevelLink from '@/components/LevelLink.vue';
 import { usePlayerInfoStore } from '@/stores/playerInfo';
 import { storeToRefs } from 'pinia';
@@ -30,15 +30,14 @@ const currentLevelRange = computed(() => {
 
 <template>
   <MiddleLayout>
-    <h1>
+    <PageTopBar>
       选择关卡
-      <BackButton />
-    </h1>
+    </PageTopBar>
+    <el-pagination v-model:current-page="currentPage" :total="playerInfo.highestLevel" layout="prev, pager, next"
+      :page-size="pageSize" hide-on-single-page />
     <el-space fill direction="vertical" style="width: 100%">
       <LevelLink :id="levelId" v-for="levelId in currentLevelRange" :key="levelId" />
     </el-space>
-    <el-pagination v-model:current-page="currentPage" :total="playerInfo.highestLevel" layout="prev, pager, next"
-      :page-size="pageSize" hide-on-single-page />
   </MiddleLayout>
 </template>
 
